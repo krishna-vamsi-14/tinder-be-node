@@ -36,6 +36,46 @@ Episode 3:
 
 ---
 
+Episode 4: 
+
+- Create .gitignore file and add node_modules in .gitignore.
+- Initialize git repository and create a remote repository. 
+- Push the existing code to github. 
+
+- Sequence of code matters if you add middlewares like .use()
+- Order of route matters, please be careful otherwise your routes will not behave as expected. 
+- HTTP Methods 
+    1. API Calls from postman.
+-Install postman, create workspace, add collections with test api calls. 
+- Why http://localhost:7777/test/hello ( GET ) call and ( POST ) call gives the same data.
+
+- How to handle different API methods in express. 
+- app.use("/test") => will map all the http methods that are calling /test/
+- app.get("/test") => This will only match get api call to /test/ route.
+
+- Advanced route handling with 
+- using ?, *, + 
+- ? => optional.
+- * => anything can be written.
+- + => kind of regex. 
+- We can also use regex also here. 
+- These advanced route handling is not generally used in real time, mean time you can ignore to learn.
+
+- How to get the dynamic params in route. 
+- req.query will give the params.
+
+
+- How to handle dynamic routes => /user/:userId
+- /user/707 => How to get userId => req.params
+
+
+
+
+
+
+
+
+
 
 
 
