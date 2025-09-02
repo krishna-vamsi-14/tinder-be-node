@@ -170,3 +170,14 @@ Episode 6: ( Database, Schema, and Mongoose)
 - Always wrap in try catch block when you are doing db operations.
 
 
+
+Episode 7 : 
+
+- What is the difference json object and javascript object.
+- JSON object needs key as a string. This is one difference. 
+- JSON object can't take comma(,) at the end of the object. 
+
+- When postman or broswer sends a request it will be in readableStream
+- request sent by postman and browser will send in json format. To read the json data we need a middleware. 
+
+- Add the express.json() middleware which helps to convert json object to javascript object which helps to create the newUser instance of User model and save it in users collection. 

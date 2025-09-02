@@ -7,16 +7,10 @@ const app = express();
 
 const PORT = process.env.PORT || 7777;
 
+app.use(express.json());
+
 app.post("/sign-up", async (req, res) => {
-  // Dummy user.
-  const user = {
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@example.com",
-    password: "password",
-    age: 25,
-    gender: "male",
-  };
+  const user = req.body;
 
   // Create a new instance of the UserModel.
   const newUser = new UserModel(user);
@@ -32,8 +26,8 @@ app.post("/sign-up", async (req, res) => {
   
 });
 
-app.use("/", (req, res) => {
-  res.send("Hello World");
+app.use("/", (err, req, res, next) => {
+  res.status(500).send('Something went wrong!! Please try again later.');
 });
 
 connectDB()
