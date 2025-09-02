@@ -180,4 +180,10 @@ Episode 7 :
 - When postman or broswer sends a request it will be in readableStream
 - request sent by postman and browser will send in json format. To read the json data we need a middleware. 
 
-- Add the express.json() middleware which helps to convert json object to javascript object which helps to create the newUser instance of User model and save it in users collection. 
+- Add the express.json() middleware which helps to convert json object to javascript object which helps to create the newUser instance of User model and save it in users collection.
+
+- User.findOne({emailId: "krishna@gmail.com"}) - It will return only single document. 
+- Mongodb functions. 
+    1. find()
+    2. findById(userId)
+    3. findByIdAndDelete(userId)
