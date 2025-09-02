@@ -151,7 +151,10 @@ Error Handlers :
 
 
 
-Episode 6: 
+Episode 6: ( Database, Schema, and Mongoose)
+
+
+
 
 
 
