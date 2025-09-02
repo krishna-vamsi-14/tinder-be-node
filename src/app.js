@@ -23,8 +23,44 @@ app.post("/sign-up", async (req, res) => {
   } catch (error) {
     res.status(500).send(error);
   }
-  
 });
+
+app.get("/users", async (req, res) => {
+    try {
+        const users = await UserModel.find();
+        res.status(200).send({
+            success: true,
+            message: "Users fetched successfully",
+            data: users,
+        });
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+})
+
+app.get("/users/:id", async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const user = await UserModel.findById(userId);
+        if(!user) {
+            res.status(404).send({
+                success: false,
+                message: 'User not found',
+            })
+        }
+
+        res.status(200).send({
+            success: true,
+            message: 'User fetched successfully',
+            data: user,
+        })
+    } catch(error) {
+        res.status(404).send({
+            success: false,
+            message: 'User not found',
+        });
+    }
+})
 
 app.use("/", (err, req, res, next) => {
   res.status(500).send('Something went wrong!! Please try again later.');
