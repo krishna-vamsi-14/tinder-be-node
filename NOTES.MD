@@ -69,13 +69,89 @@ Episode 4:
 - /user/707 => How to get userId => req.params
 
 
+Episode 5 : 
+
+- If we don't send res.send() in route handler, request will just hang and it will just timed out. 
+- One route can also have multiple route handlers.
+- app.use("/user", () => {console.log('route handler 1')}, () => {console.log('route handler 2)})
+    - If route handler1 has res.send(), it won't run the next route handler.
+    - If route handler1 doesn't sending res.send(), and route handler2 has res.send(), still it doesn't send anything in the response. it will just hang. 
+    - To work like that, we need to use 'next' function. 
+    - next() needs to be called in first route handler. so that next() will ask to execute the route handler2
+
+
+- Now, lets say route handler have res.send() and next(), and route handler 2 have res.send()
+- What will it do ?? 
+    Now res.send() in route handler1 will work and next() will get called which will go to the route handler2 and here there it will throw an error, saying it is trying to send another response with the same url.
+- Cannot set the headers after they are sent to the client. 
+
+
+
+- route handler1 have 
+    next();
+    res.send('Response1);
+
+- route handler2 have 
+    res.send('Response2');
+
+Here it seems, Response2 comes, and it will throw an error because client already send one response and it wont send again. 
 
 
 
 
+- What will happen if next() is called in last route handler ?? 
+    It will throw an error saying, cannot find /GET because, there is no next route handler. 
+
+
+- app.use("/user", [() => {}, () => {}]) -> We can pass array of functions. 
+- We can mix and match also, like few in array and other route handlers are normally. 
+
+
+- app.use("/route", rh1, rh2, rh3)
+- app.use("/route", [rh1, rh2, rh3])
+- app.use("/route", rh1, [rh2, rh3])
 
 
 
+- app.get("/user", routeHandler1);
+- app.get("/user", routeHandler2);
+
+if routeHandler2 has res.send() it will send the response after executing the routerHandler1 logic.
+
+
+* Why do we need multiple route handlers if you can do things in one place. 
+- Because of middlewares. 
+
+
+Ideally we should name only main thing as route handler, other than those we need to call as middle ware. 
+
+- route will go through chain of middle wares and sends some response. 
+
+- When we make an api call it will go through a middle ware chain and it will go to request handler. 
+
+- What is middlewares.
+- How expressjs handles request handlers with middlewares.
+
+- What is the difference between app.use() and app.all()
+- Why do we need middlewares. 
+- Write a dummy authentication middleware for admin. 
+- Write a dummy authentication middleware for user routes except /user/sign-up. 
+- We can also use third party middlewares. 
+
+
+Error Handlers : 
+
+1. In middle ware function if you are passing two parameters express will treat as req and res. 
+2. If you are passing three parameters it will treat as req, res, next
+3. If you pass four parameters it will pass as err, req, res, next 
+4. Learn how to handle syncrhonous errors and asynchronous errors.
+
+
+5. Write a common error handler at the end of the routes to catch some errors if missed in catch blocks.
+
+
+
+Episode 6: 
 
 
 
