@@ -154,7 +154,19 @@ Error Handlers :
 Episode 6: ( Database, Schema, and Mongoose)
 
 
+- We should do app.listen() once database is connected only. 
+- Create a free cluster in mongodb application. 
+- Connect mongodburi to the application. 
+- Make sure to listen to port after mongodb connection is established.
+- Create a User Schema and User Model. 
+- What will happen if we send _id manually ?? 
+    It will take it as mongo object id only, but don't play with _id. Let mongodb handle it. 
 
+- What is __v in mongo document ?
+    It is version of each document, when we change any document it will update the version. 
 
+- Create a sign-up api to add users to database. 
+- Try to push documents using api call and push dummy data using .save() on mongoose model. 
+- Always wrap in try catch block when you are doing db operations.
 
 
