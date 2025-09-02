@@ -187,3 +187,8 @@ Episode 7 :
     1. find()
     2. findById(userId)
     3. findByIdAndDelete(userId)
+    4. findByIdAndUpdate(userId, updatedData)
+        If you are passing a new key which is not in key, mongo doesn't add that key in the db. 
+        Mongo will handle interally, any key apart from the schema will be ignored.
+
+        
