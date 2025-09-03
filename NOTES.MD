@@ -213,7 +213,7 @@ Episode 8 :
 - Timestamps in mongodb schema. 
 
 
+API level validations.
 
-
-
-
+* Like we dont want to give an option to udpate the emailId in user schema.
+* We should allow users to update only certain fields of the user schema.

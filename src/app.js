@@ -88,6 +88,17 @@ app.patch("/users/:id", async (req, res) => {
     const userId = req.params.id;
     const updatedData = req.body;
 
+    const allowedUpdates = ['firstName', 'lastName', 'age', 'gender'];
+
+    const isValidUpdate = Object.keys(updatedData).every(update => allowedUpdates.includes(update));
+
+    if(!isValidUpdate) {
+        res.status(400).send({
+            success: false,
+            message: `${allowedUpdates.join(', ')} are only allowed to update`,
+        });
+    }
+
     try {
         const user = await UserModel.findByIdAndUpdate(userId, updatedData, {
             runValidators: true,
