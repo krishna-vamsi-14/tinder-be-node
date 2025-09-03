@@ -191,4 +191,29 @@ Episode 7 :
         If you are passing a new key which is not in key, mongo doesn't add that key in the db. 
         Mongo will handle interally, any key apart from the schema will be ignored.
 
-        
+
+Episode 8 : 
+
+- Schema Validations. 
+    1. default: 
+    2. required:
+    3. unique:
+    4. validate:
+    5. trim: 
+    6. lowercase:
+    7. minLength:
+    8. maxLength:
+    9. min: ( This is for Number )
+    10. max: ( This is for Number )
+
+
+- By Default, Validate method in schema will only get called when new document in collection is getting created. If we try to update a document. It wont throw the error.
+
+- We need to add runValidators: true in findByIdAndUpdate options.
+- Timestamps in mongodb schema. 
+
+
+
+
+
+

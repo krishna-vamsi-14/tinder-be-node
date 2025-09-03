@@ -5,7 +5,7 @@ const UserModel = require("./models/user");
 
 const app = express();
 
-const PORT = process.env.PORT || 7777;
+const PORT = process.env.PORT || 8000;
 
 app.use(express.json());
 
@@ -89,7 +89,9 @@ app.patch("/users/:id", async (req, res) => {
     const updatedData = req.body;
 
     try {
-        const user = await UserModel.findByIdAndUpdate(userId, updatedData);
+        const user = await UserModel.findByIdAndUpdate(userId, updatedData, {
+            runValidators: true,
+        });
         if(!user) {
             res.status(404).send({
                 success: false,
@@ -100,7 +102,7 @@ app.patch("/users/:id", async (req, res) => {
         res.status(200).send({
             success: true,
             message: 'User updated successfully',
-            data: user,
+            data: updatedData,
         });
     } catch(error) {
         res.status(500).send(error.message);
