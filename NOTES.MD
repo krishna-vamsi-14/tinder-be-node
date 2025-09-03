@@ -219,3 +219,14 @@ API level validations.
 * We should allow users to update only certain fields of the user schema.
 
 - use validator.js
+- For email validation, password validation, isURL valiation, isEmail, isStrongPassword
+
+
+Episode 9 : 
+
+- Never trust req.body.
+- Lets sanitize signup api. 
+- Hasing password. 
+- bcrypt.hash(password, saltRounds);
+- Add login route by using bcrypt.compare(password, password saved in db)
+
