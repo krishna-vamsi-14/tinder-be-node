@@ -269,6 +269,17 @@ jwt.sign
 jwt.verify
 
 
+- Create a auth middleware, and add auth middleware in all the business logic apis. 
+- Set the expires in cookies and expiryIn in jwt token. 
 
+
+Mongoose schema methods : 
+
+- User schema defines the schema of the user. We can attach methods to the schema, that will be applicable to all the users. 
+- These are the helper methods. 
+
+- We can offload creation of jwt creation logic from handler to schema method.
+- Add create jwt token schema method in user schema.
+- Add validate password method to user schema.
 
 

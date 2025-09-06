@@ -53,7 +53,7 @@ app.post("/login", async (req, res) => {
       });
     }
 
-    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    const isPasswordCorrect = await user.validatePassword(password);
     if (!isPasswordCorrect) {
       res.status(401).send({
         success: false,
@@ -62,13 +62,12 @@ app.post("/login", async (req, res) => {
     }
 
     // Create a JWT token. 
-    const token = jwt.sign({ user: user }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    const token = await user.generateJwtToken();
     // Attach the JWT token to a cookie and send it back to the browser. 
 
     console.log("jwt token", token);
 
     res.cookie("token", token, {
-      httpOnly: true,
       secure: true,
       maxAge: 1000 * 60 * 60 * 24 * 30,
     });

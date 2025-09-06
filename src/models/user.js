@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const validator = require("validator");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const userSchema = new Schema(
   {
@@ -64,6 +66,15 @@ const userSchema = new Schema(
   },
   { timestamps: true }
 );
+
+userSchema.methods.generateJwtToken = async function() {
+  const token = await jwt.sign({ user: this }, process.env.JWT_SECRET, { expiresIn: "1h" });
+  return token;
+}
+
+userSchema.methods.validatePassword = async function(password) {
+  return await bcrypt.compare(password, this.password);
+}
 
 // Name of the Model is 'UserModel'
 // Name of the Mongoose model should be starting with capital letter.
