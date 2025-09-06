@@ -230,3 +230,45 @@ Episode 9 :
 - bcrypt.hash(password, saltRounds);
 - Add login route by using bcrypt.compare(password, password saved in db)
 
+
+
+Episode 10 : 
+
+- Authentication, JWT, Cookies. 
+
+1. If user wants to connect with server -> There will be a tcp ip protocol. 
+2. When we login -> Server generates a JWT token -> User will store the JWT token. 
+3. After that every time JWT token will be sent with every request. 
+4. In every request, server will validate if that token is valid or not.
+5. Cookies ?? -> When we logging in with login api, server will send a successful response, along with it, it will send a cookie which has token. 
+6.Browser will store the cookie and whenever we are api call, cookie will be sent to server, and then that cookie will be validated.
+7.Cookie will travel/sent to server for each and every api. 
+
+8. When will the cookie won't work ?? 
+9. If we gave expiry time to cookie or jwt token, then cookie won't work after cookie time.
+10. Whenever user is logging in, server will create a jwt token, attach to a cookie, and sent it to the browser. 
+
+
+11. Express gives a way to send a cookie in response. 
+res.cookie
+
+
+12. We need a cookieparser to read the cookies. 
+npm i cookie-parser
+const cookieParser = require("cookie-parser");
+
+app.use(cookieParser())
+
+13. JWT token will consists of three types - Header, payload, signature. 
+you can check these will be in red, pink, blue colours in jwt office documentation. 
+
+Install jsonwebtoken npm package for generating json web token. 
+It will give a way to signing the jwt token and verifying the token. 
+
+jwt.sign
+jwt.verify
+
+
+
+
+

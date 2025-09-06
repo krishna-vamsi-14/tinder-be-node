@@ -4,12 +4,16 @@ const { connectDB } = require("./config/database");
 const UserModel = require("./models/user");
 const { validateSignUpData } = require("./utils/validation");
 const bcrypt = require("bcrypt");
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
+const { authenticate } = require("./middlewares/auth");
 
 const app = express();
 
 const PORT = process.env.PORT || 8000;
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.post("/sign-up", async (req, res) => {
   // Validate the request body.
@@ -57,6 +61,17 @@ app.post("/login", async (req, res) => {
       });
     }
 
+    // Create a JWT token. 
+    const token = jwt.sign({ user: user }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    // Attach the JWT token to a cookie and send it back to the browser. 
+
+    console.log("jwt token", token);
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      maxAge: 1000 * 60 * 60 * 24 * 30,
+    });
     res.status(200).send({
       success: true,
       message: "Login successful",
@@ -70,20 +85,22 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/users", async (req, res) => {
+app.get("/users", authenticate, async (req, res) => {
   try {
+
     const users = await UserModel.find();
     res.status(200).send({
       success: true,
       message: "Users fetched successfully",
-      data: users,
+      data: users
     });
   } catch (error) {
+    console.log("error - ", error);
     res.status(500).send(error.message);
   }
 });
 
-app.get("/users/:id", async (req, res) => {
+app.get("/users/:id", authenticate, async (req, res) => {
   try {
     const userId = req.params.id;
     const user = await UserModel.findById(userId);
@@ -107,7 +124,7 @@ app.get("/users/:id", async (req, res) => {
   }
 });
 
-app.delete("/users/:id", async (req, res) => {
+app.delete("/users/:id", authenticate, async (req, res) => {
   const userId = req.params.id;
 
   try {
@@ -129,7 +146,7 @@ app.delete("/users/:id", async (req, res) => {
   }
 });
 
-app.patch("/users/:id", async (req, res) => {
+app.patch("/users/:id", authenticate, async (req, res) => {
   const userId = req.params.id;
   const updatedData = req.body;
 
