@@ -12,9 +12,11 @@ const authenticate = async (req, res, next) => {
             return res.status(401).send({ message: "Unauthorized" });
         }
 
-        if(req.params.id && req.params.id !== isValidToken?.user?._id) {
+        if(req?.params?.id && req?.params?.id !== isValidToken?.user?._id) {
             return res.status(401).send({ message: "Unauthorized to perform this action" });
         }
+
+        req.user = isValidToken?.user;
 
         next();
     } catch (error) {

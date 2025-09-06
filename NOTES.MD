@@ -283,3 +283,16 @@ Mongoose schema methods :
 - Add validate password method to user schema.
 
 
+Episode 11 : 
+
+- Express router. ( We can check express router documentation )
+
+const express = require("express");
+
+const app = express();
+const authRouter = express.Router();
+
+app.use();
+authRouter.use();
+
+Both works in similar for us. Almost no difference, express manages internally.
