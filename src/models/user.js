@@ -36,7 +36,6 @@ const userSchema = new Schema(
       type: String,
     },
     interestedIn: {
-      default: "",
       type: String,
       validate: {
         validator: function (value) {

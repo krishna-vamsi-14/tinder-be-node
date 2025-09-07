@@ -73,3 +73,5 @@ router.post("/request/send/:status/:toUserId", authenticate, async (req, res) =>
         });
     }
 })
+
+module.exports = router;

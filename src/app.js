@@ -18,10 +18,13 @@ app.use(cookieParser());
 const authRouter = require("./routes/authRouter");
 const profileRouter = require("./routes/profileRouter");
 const userRouter = require("./routes/userRouter");
+const connectionRequestRouter = require("./routes/connectionRequestRouter");
 
 app.use("/", authRouter);
 app.use("/", profileRouter);
 app.use("/", userRouter);
+app.use("/", connectionRequestRouter);
+
 
 app.use("/", (err, req, res, next) => {
   res.status(500).send("Something went wrong!! Please try again later.");
