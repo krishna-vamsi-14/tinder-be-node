@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { authenticate } = require("../middlewares/auth");
 const UserModel = require("../models/user");
+const { upload } = require("../utils/fileUpload");
 
 
 router.get("/profile/:id", authenticate, async (req, res) => {
@@ -51,16 +52,23 @@ router.delete("/profile/:id", authenticate, async (req, res) => {
       res.status(500).send(error.message);
     }
 });
+
   
-router.patch("/profile/:id", authenticate, async (req, res) => {
+router.patch("/profile/:id", authenticate, upload.array("images", 4), async (req, res) => {
     const userId = req.params.id;
     const updatedData = req.body;
   
-    const allowedUpdates = ["firstName", "lastName", "age", "gender"];
+    const allowedUpdates = ["firstName", "lastName", "age", "gender", "images"];
+
+    const files = req.files;
   
     const isValidUpdate = Object.keys(updatedData).every((update) =>
       allowedUpdates.includes(update)
     );
+
+    if(files.length > 0) {
+        updatedData.images = files.map((file) => file.path);
+    }
   
     try {
       if (!isValidUpdate) {
