@@ -296,3 +296,11 @@ app.use();
 authRouter.use();
 
 Both works in similar for us. Almost no difference, express manages internally.
+
+
+Episode 12 : 
+
+Indexes in database - Because, queries will become slow because of large database,
+If we put indexes on some columns querying will be faster than usual. 
+Mongodb automatically adds an index if you say your column value is unique.
+For example email in user schema is unique and mongodb automatically add index on email. 

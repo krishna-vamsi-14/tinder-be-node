@@ -4,6 +4,7 @@ const validator = require("validator");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
+
 const userSchema = new Schema(
   {
     firstName: {
@@ -17,6 +18,48 @@ const userSchema = new Schema(
       required: true,
       minlength: [3, "Last name must be at least 3 characters long"],
       maxlength: [50, "Last name must be at most 50 characters long"],
+    },
+    nickName: {
+      default: "",
+      type: String,
+    },
+    about: {
+      default: "",
+      type: String,
+    },
+    occupation: {
+      default: "",
+      type: String,
+    },
+    education: {
+      default: "",
+      type: String,
+    },
+    interestedIn: {
+      default: "",
+      type: String,
+      validate: {
+        validator: function (value) {
+          return ["male", "female", "other"].includes(value);
+        },
+        message: "Invalid interested in value",
+      }
+    },
+    minAgeRangePreference: {
+      type: Number,
+      default: 18,
+      min: [18, "Minimum age range preference must be at least 18"],
+      max: [100, "Maximum age range preference must be at most 100"],
+    },
+    maxAgeRangePreference: {
+      type: Number,
+      default: 30,
+      min: [18, "Maximum age range preference must be at least 18"],
+      max: [100, "Maximum age range preference must be at most 100"],
+    },
+    interests: {
+      default: [],
+      type: [String],
     },
     email: {
       type: String,
