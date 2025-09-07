@@ -63,6 +63,11 @@ const userSchema = new Schema(
         message: "Invalid gender",
       },
     },
+    // I want to store user images in the database using multer. but initally when signing up, i dont need images,but once login, we will give options to add images, so we will call patch api so that images will come here. 
+    images: {
+      type: [String],
+      default: [],
+    },
   },
   { timestamps: true }
 );

@@ -6,8 +6,6 @@ const UserModel = require("../models/user");
 router.get("/user/feed", authenticate, async (req, res) => {
     try {
         const users = await UserModel.find();
-        console.log('users', users);
-        console.log('req.user._id', req.user._id);
         // Filter out my profile from the list of users.
         const filteredUsers = users.filter((user) => user._id.toString() !== req.user._id.toString());
 
