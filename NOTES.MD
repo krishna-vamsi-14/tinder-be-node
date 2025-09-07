@@ -304,3 +304,17 @@ Indexes in database - Because, queries will become slow because of large databas
 If we put indexes on some columns querying will be faster than usual. 
 Mongodb automatically adds an index if you say your column value is unique.
 For example email in user schema is unique and mongodb automatically add index on email. 
+
+
+$or and $and queries in mongodb.
+-sparse index.
+-unique index.
+-index
+
+-compound index ( If we want to create index with two column values)
+-For us we need to create compound index for fromUserId and toUserId in connectionRequest Schema.
+- connectionRequest.index({fromUserId: 1, toUserId: 1})
+
+- Creating index unnessiraly also comes with a cost. 
+- Be specific about indexes. 
+- Initally there is no need of creating index for less users.
